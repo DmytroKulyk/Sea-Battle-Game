@@ -2,7 +2,7 @@ $(document).ready(function(){
 
  for(var j = 10; j < 20; j++){	 
      for(var i = 0; i < 10; i++){
-	$("#Div").append('<div class="new name' + j + i + '"></div>' );
+	$("#Div").append('<div class="new ' + j + i + '"></div>' );
   }
   $("#Div").append('<br>');
 }
@@ -16,36 +16,82 @@ $('.new').click(function() {
 
  for(var j = 10; j < 20; j++){	 
      for(var i = 0; i < 10; i++){
-	$("#Div1").append('<div class="newOne name' + j + i + '"></div>' );
+	$("#Div1").append('<div class="newOne ' + j + i + '"></div>' );
   }
   $("#Div1").append('<br>');
  }
 
 
+var ships = [];
 
-var checkArr = [121, 122, 123, 198, 176, 177, 178, 199, 100,101,102,103, 166, 156, 146];
 
 $('.newOne').click(function() {
-
-for(var g = 0; g < checkArr.length; g++){
-	var number = checkArr[g];
+    
+for(var g = 0; g < ships.length; g++){
+	
+	var number = ships[g];
 		
-	if($(this).hasClass('name' + number)){
+	if($(this).hasClass(number)){
+		
 		$(this).addClass('backColorBlue');
+
 	}else{
+		
 		$(this).addClass('backColorRed');
 	  }
 	}
-    // console.log(this);
+    
+   console.log(this); 
+    
 });
 
+//choose rendomly positions for ships on the fild
+var  shipsPosition = (function(){
+	//for 4decks ship, should be 1 of them
+var x = Math.floor(Math.random()*60)+ 100;
+for(var g = x; g < x+40; g+=10){
+	  ships.push(g);
+ }
+   //tree decks shipit should be 2 of them
+  for(var b = 0; b < 2; b++){
+ var y = Math.floor(Math.random()*70)+ 100;
+ for(var i = y ; i < y + 30; i+=10){
+	  ships.push(i);
+    }
+ } 
+ //two decks ship, it should be 3 of them
+ for(var z = 0; z < 3; z++){
+ var d = Math.floor(Math.random()*80)+ 100;
+ for(var s = d ; s < d + 20; s+=10){
+	  ships.push(s);
+   }
+ }
+ //one decks ship, it should be 4 of them
+  for(var p = 0; p < 4; p++){
+ var q = Math.floor(Math.random()*90)+ 100;
+  for(var f = q ; f < q + 10; f+=10){
+	  ships.push(f);
+     }
+   }
+ })();
+ 
+ 
+ checkMatch(ships);
+ //function checks if any numbers in the array ships match
+ // it call function shipsPosition 
+ function checkMatch(arr){
+ 	for(var i = 0; i <arr.length; i++){
+ 		for(var j = i+1; j<arr.length+1; j++){
+ 			if(arr[i] === arr[j]){
+ 				return shipsPosition;
+ 			}
+ 		}
+ 	}
+ }
 
+ // checkMatch(ships);
 
-// var arr = [];
-//  for(var i = 100; i<200; i++){
-//   arr.push(i);
-//   }
-
+console.log(ships);
 
  
 
