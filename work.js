@@ -22,10 +22,8 @@ $('.new').click(function() {
  }
 
 
-var ships = [];
 
-
-$('.newOne').click(function() {
+$('.newOne').hover(function() {
     
 for(var g = 0; g < ships.length; g++){
 	
@@ -45,8 +43,9 @@ for(var g = 0; g < ships.length; g++){
     
 });
 
+var ships = [];
 //choose rendomly positions for ships on the fild
-var  shipsPosition = (function(){
+var  shipsPosition = function(){
 	//for 4decks ship, should be 1 of them
 var x = Math.floor(Math.random()*60)+ 100;
 for(var g = x; g < x+40; g+=10){
@@ -73,17 +72,18 @@ for(var g = x; g < x+40; g+=10){
 	  ships.push(f);
      }
    }
- })();
+ };
  
- 
+ shipsPosition();
  checkMatch(ships);
  //function checks if any numbers in the array ships match
  // it call function shipsPosition 
  function checkMatch(arr){
  	for(var i = 0; i <arr.length; i++){
  		for(var j = i+1; j<arr.length+1; j++){
- 			if(arr[i] === arr[j]){
- 				return shipsPosition;
+ 			while(arr[i] === arr[j]){
+ 				ships.length = 0;
+ 			   shipsPosition();
  			}
  		}
  	}
