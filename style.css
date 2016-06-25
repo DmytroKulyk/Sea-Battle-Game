@@ -10,6 +10,9 @@ h1{
 .backColorBlue{
 	background-color: blue;
 }
+.backgroundOrange{
+	background-color: green;
+}
 #Div div{
 	display: inline-block;
 	position: relative;
@@ -28,3 +31,9 @@ h1{
 	border: 1px solid black;
 	margin-top: -4px
 }
+
+
+.buttonStart button{
+	margin: 20px;
+}
+
