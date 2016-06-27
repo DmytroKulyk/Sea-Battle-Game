@@ -36,32 +36,42 @@ for(var d = 100; d <200; d++){
 $('.newOne').click(function() {
 var randomNumber;
 var con = 0;
+randFunc();
 
-var randFunc = (function(){
+function randFunc(){
   randomNumber = Math.floor(Math.random()*arrayCellNumbers.length)+100;
+   not();
    console.log(randomNumber); 
- })();
+ };
 
-function not(dat, arr) { //"not" function
-for(var i=0;i<arr.length;i++) {
-  if(arr[i] == dat){return false;}
-}
-return true;
-}
-  
-if(not(randomNumber, splicedNumber)){
+function not() { 
+for(var i=0;i<splicedNumber.length;i++) {
+  if(splicedNumber[i] == randomNumber){ 
+  	      con++
+          randFunc();
+          console.log(1);
+      }
+ }
 $("#Div ."+randomNumber).addClass('backColorRed');
       	var x = randomNumber-100;
 	   	var y = arrayCellNumbers.splice(x, 1);
 	         splicedNumber.push(y[0]);
-	         console.log(2);
 	         con--;
-
-}else{
-	 con++
-          randFunc;
-            console.log(1);
 }
+  
+// if(not(randomNumber, splicedNumber)){
+// $("#Div ."+randomNumber).addClass('backColorRed');
+//       	var x = randomNumber-100;
+// 	   	var y = arrayCellNumbers.splice(x, 1);
+// 	         splicedNumber.push(y[0]);
+// 	         console.log(2);
+// 	         con--;
+
+// }else{
+// 	 con++
+//           randFunc;
+//             console.log(1);
+// }
 
 
 
