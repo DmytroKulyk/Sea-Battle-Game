@@ -1,8 +1,13 @@
 $(document).ready(function(){
 
+var arrayCellNumbers = [];
+var splicedNumber = [0]; 
 
+for(var d = 100; d <200; d++){
+	arrayCellNumbers.push(d);
+}
 
-//when the page loads, it makes 100 divs on right side
+//when the page loads, it makes 100 cells (divs) on right side
  for(var j = 10; j < 20; j++){	 
      for(var i = 0; i < 10; i++){
 	$("#Div").append('<div class="new ' + j + i + '"></div>' );
@@ -10,13 +15,6 @@ $(document).ready(function(){
   $("#Div").append('<br>');
 }
 
-
-//on click function addBackground colore red
-// $('.new').click(function() {
-//     $('div.backColorRed').removeClass('backColorRed');
-// 	$(this).addClass('backColorRed');
-   
-// });
 
 
 //when the page loads, it makes 100 divs on Left side
@@ -29,12 +27,51 @@ $(document).ready(function(){
 
 
 
+
+//==========computerside(right)===============
 //on click the function check the position of cell
 //if its match with the number in the array ships
 //it makes background colore blue
 //if not red;
 $('.newOne').click(function() {
-    
+var randomNumber;
+var con = 0;
+
+var randFunc = (function(){
+  randomNumber = Math.floor(Math.random()*arrayCellNumbers.length)+100;
+   console.log(randomNumber); 
+ })();
+
+function not(dat, arr) { //"not" function
+for(var i=0;i<arr.length;i++) {
+  if(arr[i] == dat){return false;}
+}
+return true;
+}
+  
+if(not(randomNumber, splicedNumber)){
+$("#Div ."+randomNumber).addClass('backColorRed');
+      	var x = randomNumber-100;
+	   	var y = arrayCellNumbers.splice(x, 1);
+	         splicedNumber.push(y[0]);
+	         console.log(2);
+	         con--;
+
+}else{
+	 con++
+          randFunc;
+            console.log(1);
+}
+
+
+
+
+
+console.log(arrayCellNumbers.length, splicedNumber, arrayCellNumbers, con);
+
+
+//===================================================
+
 for(var g = 0; g < ships.length; g++){
 	
 	var number = ships[g];
@@ -121,34 +158,39 @@ for(var g = x; g < x+40; g+=10){          // and than add fore more cell s
 console.log(counter, ships);
 
  
-document.oncontextmenu = function() {return false;};//disable the browser context menu
+//document.oncontextmenu = function() {return false;};//disable the browser context menu
+
 ///=========userSide(left side)===============
 
-	$('.new').mousedown(function(event) {
-       if(event.which == 3){
-            $(this).removeClass('backgroundOrange');
-        }  
-});
-
-var countClicks = 0
+//on click buttonStart you can start adding ships(backgroundGreen)
+$(".buttonStart button").on("click", addShipsUser); 
 
 function addShipsUser(){
-
 $('.new').click(function() {
-	countClicks++;
- 	$(this).addClass('backgroundOrange');
+ 	$(this).addClass('backgroundGreen');
  	
      });
  }
+ //when you press on right side of mouse you can removeclass(backgroundGreen)
+ //so you can change the place of the ship on the fild
+$('.new').mousedown(function(event) {
+    if(event.which == 3){
+         $(this).removeClass('backgroundGreen');
+       }  
+});
 
-$(".buttonStart button").on("click", addShipsUser); 
-   	
+
+//when you add ships(backgroundGreen) you press buttonDone that torn off click event   	
 $(".buttonDone button").click(function(){
 	$('.new').off('click');
 	$('.new').off('mousedown');
+	$(".buttonStart").remove();
 })
 
+//================computer gess=============
 
+//evry time when user press on the cell on right side and miss
+// computer randomly chosse the cell on the left side
 
 
 
